@@ -13,6 +13,35 @@ func NewAgendaDB() repo.AgendaRepository {
 type AgendaRepository struct {
 }
 
+// Get implements repository.AgendaRepository
+func (*AgendaRepository) Get() ([]*model.Agenda, error) {
+	var agendas []*model.Agenda
+	cur, err := db.Collection("agendas").Find(dbCtx, nil)
+	if err != nil {
+		return agendas, err
+	}
+
+	// Iterate through the cursor and decode items
+	for cur.Next(dbCtx) {
+		var item model.Agenda
+		err := cur.Decode(&item)
+		if err != nil {
+			return agendas, err
+		}
+
+		agendas = append(agendas, &item)
+	}
+
+	if err := cur.Err(); err != nil {
+		return agendas, err
+	}
+
+	// close the cursor
+	cur.Close(dbCtx)
+
+	return agendas, nil
+}
+
 // GetBy implements repository.AgendaRepository
 func (*AgendaRepository) GetBy(disponibilidade string) (*model.Agenda, error) {
 	panic("unimplemented")
