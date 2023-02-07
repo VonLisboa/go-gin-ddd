@@ -30,6 +30,7 @@ func (handler *AgendaHandler) Create(ctx *gin.Context) {
 	var data model.Agenda
 	if err := ctx.ShouldBindJSON(&data); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
+		return
 	}
 	if _, err := handler.service.Create(data); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})

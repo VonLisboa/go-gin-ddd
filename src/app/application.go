@@ -2,7 +2,7 @@ package app
 
 import (
 	"go-gin-ddd/src/database"
-	service "go-gin-ddd/src/domain/agendas/services"
+	agendaService "go-gin-ddd/src/domain/agendas/services"
 
 	"github.com/gin-gonic/gin"
 
@@ -14,10 +14,10 @@ var (
 )
 
 func StartApp() {
-	gin.SetMode("DEBUG")
+	gin.SetMode("debug")
 
 	database.Init()
-	agendaHandler := http.NewHandler(service.NewService(database.NewAgendaDB()))
+	agendaHandler := http.NewHandler(agendaService.NewService(database.NewAgendaDB()))
 
 	router.POST("/agendas", agendaHandler.Create)
 

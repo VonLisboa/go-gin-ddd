@@ -24,25 +24,25 @@ func NewService(repository repository.AgendaRepository) AgendaService {
 	}
 }
 
-func (s *agendaService) Create(user model.Agenda) (*model.Agenda, error) {
+func (s *agendaService) Create(agenda model.Agenda) (*model.Agenda, error) {
 
-	if err := user.ValidateCnpj(); err != nil {
+	if err := agenda.ValidateCnpj(); err != nil {
 		return nil, err
 	}
 
-	return s.repository.Create(user)
+	return s.repository.Create(agenda)
 }
 
 func (s *agendaService) GetBy(disponibilidade string) (*model.Agenda, error) {
 	if len(disponibilidade) == 0 {
-		return nil, errors.New("invalid user id. UserId can't be empty")
+		return nil, errors.New("invalid params")
 	}
 
-	user, err := s.repository.GetBy(disponibilidade)
+	agenda, err := s.repository.GetBy(disponibilidade)
 
 	if err != nil {
-		userNotFoundErr := fmt.Sprintf("Nothing found for \"disponibilidade\": %s", disponibilidade)
-		return nil, errors.New(userNotFoundErr)
+		agendaNotFoundErr := fmt.Sprintf("Nothing found for \"disponibilidade\": %s", disponibilidade)
+		return nil, errors.New(agendaNotFoundErr)
 	}
-	return user, nil
+	return agenda, nil
 }

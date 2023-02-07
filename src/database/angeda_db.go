@@ -7,20 +7,20 @@ import (
 
 // constructor
 func NewAgendaDB() repo.AgendaRepository {
-	return &dbRepository{}
+	return &AgendaRepository{}
 }
 
-type dbRepository struct {
+type AgendaRepository struct {
 }
 
 // GetBy implements repository.AgendaRepository
-func (*dbRepository) GetBy(disponibilidade string) (*model.Agenda, error) {
+func (*AgendaRepository) GetBy(disponibilidade string) (*model.Agenda, error) {
 	panic("unimplemented")
 }
 
 // Create implements repository.AgendaRepository
-func (repo *dbRepository) Create(agenda model.Agenda) (*model.Agenda, error) {
-	_, err := Mongo.Collection("agendas").InsertOne(MongoContext, agenda)
+func (repo *AgendaRepository) Create(agenda model.Agenda) (*model.Agenda, error) {
+	_, err := db.Collection("agendas").InsertOne(dbCtx, agenda)
 	if err != nil {
 		return nil, err
 	}
