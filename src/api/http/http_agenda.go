@@ -1,12 +1,15 @@
 package http
 
 import (
+	"go-gin-ddd/src/domain/agendas/model"
 	service "go-gin-ddd/src/domain/agendas/services"
+
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type AgendaInterface interface {
+type AgendaServer interface {
 	Get(ctx *gin.Context)
 	GetBy(ctx *gin.Context)
 	Create(ctx *gin.Context)
@@ -16,23 +19,32 @@ type AgendaHandler struct {
 	service service.AgendaService
 }
 
-func NewHandler(agenda service.AgendaService) AgendaInterface {
+func NewHandler(agenda service.AgendaService) AgendaServer {
 	return &AgendaHandler{
 		service: agenda,
 	}
 }
 
-// Create implements AgendaInterface
+// Create implements AgendaServer
 func (handler *AgendaHandler) Create(ctx *gin.Context) {
-	panic("unimplemented")
+	var data model.Agenda
+	if err := ctx.ShouldBindJSON(&data); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
+	}
+	if _, err := handler.service.Create(data); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusCreated, data)
 }
 
-// Get implements AgendaInterface
+// Get implements AgendaServer
 func (handler *AgendaHandler) Get(ctx *gin.Context) {
 	panic("unimplemented")
 }
 
-// GetBy implements AgendaInterface
+// GetBy implements AgendaServer
 func (handler *AgendaHandler) GetBy(ctx *gin.Context) {
 	panic("unimplemented")
 }
