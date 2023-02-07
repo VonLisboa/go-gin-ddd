@@ -42,10 +42,20 @@ func (handler *AgendaHandler) Create(ctx *gin.Context) {
 
 // Get implements AgendaServer
 func (handler *AgendaHandler) Get(ctx *gin.Context) {
-	panic("unimplemented")
+	data, err := handler.service.Get()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"status": "fail", "message": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, data)
 }
 
 // GetBy implements AgendaServer
 func (handler *AgendaHandler) GetBy(ctx *gin.Context) {
-	panic("unimplemented")
+	data, err := handler.service.GetBy(ctx.Param("disponibilidade"))
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"status": "fail", "message": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, data)
 }

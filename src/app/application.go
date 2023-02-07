@@ -19,6 +19,8 @@ func StartApp() {
 	database.Init()
 	agendaHandler := http.NewHandler(agendaService.NewService(database.NewAgendaDB()))
 
+	router.GET("/agendas", agendaHandler.Get)
+	router.GET("/agendas/:disponibilidade", agendaHandler.GetBy)
 	router.POST("/agendas", agendaHandler.Create)
 
 	_ = router.Run(":3000")
