@@ -1,0 +1,121 @@
+_type: export
+__export_format: 4
+__export_date: 2023-02-07T17:32:55.236Z
+__export_source: insomnia.desktop.app:v2021.5.2
+resources:
+  - _id: req_092463447aba4230b1f6ebc505a7ae9e
+    parentId: wrk_aeaa74122bf844a2a44639d01e12c089
+    modified: 1675791075348
+    created: 1675791073893
+    url: http://localhost:3000/agendas
+    name: agendas
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1675791073893
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_aeaa74122bf844a2a44639d01e12c089
+    parentId: null
+    modified: 1675791041763
+    created: 1675791041763
+    name: Teste Go
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_399241fa130d4511b5ea59c2c73e33fe
+    parentId: wrk_aeaa74122bf844a2a44639d01e12c089
+    modified: 1675791130892
+    created: 1675791119418
+    url: http://localhost:3000/agendas
+    name: agendas
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": "",
+        	"horario": "10:00",
+        	"empresa": {
+        		"cnpj": "26488705000193",
+        		"nome": "teste"
+        	},
+        	"horarios":[
+        		{
+        			"inicio": 22,
+        			"fim": 3
+        		}
+        	]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_b31ede41c27640fe8479193d88075e70
+    authentication: {}
+    metaSortKey: -1675422523508
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7492895665184899809d8ac5b924aed7
+    parentId: wrk_aeaa74122bf844a2a44639d01e12c089
+    modified: 1675791094961
+    created: 1675791080253
+    url: http://localhost:3000/agendas/15
+    name: agendas-disponibilidade
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1675053973123
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_8634b701a07ed67991a7979328e5fd8f8c8a496e
+    parentId: wrk_aeaa74122bf844a2a44639d01e12c089
+    modified: 1675791041767
+    created: 1675791041767
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1675791041767
+    _type: environment
+  - _id: jar_8634b701a07ed67991a7979328e5fd8f8c8a496e
+    parentId: wrk_aeaa74122bf844a2a44639d01e12c089
+    modified: 1675791041769
+    created: 1675791041769
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_6f7135463de14e8e8d61a7e5d2fd429d
+    parentId: wrk_aeaa74122bf844a2a44639d01e12c089
+    modified: 1675791041764
+    created: 1675791041764
+    fileName: Teste Go
+    contents: ""
+    contentType: yaml
+    _type: api_spec
