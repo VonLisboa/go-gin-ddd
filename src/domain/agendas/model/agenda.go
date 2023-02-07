@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/klassmann/cpfcnpj"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -21,12 +23,18 @@ type Empresa struct {
 }
 
 type Horario struct {
-	Inicio     string `json:"inicio" bson:"inicio"`
-	Fim        string `json:"fim" bson:"fim"`
-	Disponivel bool   `json:"disponivel" bson:"disponivel"`
+	Inicio     int32 `json:"inicio" bson:"inicio,minsize"`
+	Fim        int32 `json:"fim" bson:"fim,minsize"`
+	Disponivel bool  `json:"disponivel" bson:"disponivel"`
 }
 
 func (agenda *Agenda) ValidateCnpj() error {
+	cnpj := cpfcnpj.NewCNPJ(agenda.Empresa.Cnpj)
+
+	// Verifies if it is a valid document
+	if !cnpj.IsValid() {
+		return errors.New("invalid cnpj")
+	}
 
 	return nil
 }
